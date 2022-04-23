@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"> <!-- DO NOT EDIT THIS LINE-->
+    <title>Project</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+</head>
+<body>
+<div class="content-container">
+
+    <div class="content">
+        <div id="blank-top"></div>
+        <div id="top-container">
+            <div id="h-title">Visualizing YouTube Trending Videos</div>
+            <div id="h-subtitle">
+                <div>
+                    This project is a visualization of YouTube trending videos (2021-22).
+                </div>
+                Explore what factors impact trending videos by filtering trending video data taken from the YouTube
+                API based on video category, country, timeline, and metric (views, likes, dislikes, comments).
+                Then, our visualization tool will display this filtered data for you!
+                <div>
+                    We intend to help content creators better understand what currently drives videos to become
+                    trending, and provide them with insights into how they can optimize their own content.
+                </div>
+            </div>
+            <div class="filters-container">
+                <div id="category">
+                    Filter by category:&nbsp;
+                    <label for="category-selector"></label><select id="category-selector" class="dropdown"
+                                                                   onchange="categoryEventListener()">
+                    <option value="0">All</option>
+                    <option value="1">Film & Animation</option>
+                    <option value="2">Autos & Vehicles</option>
+                    <option value="10">Music</option>
+                    <option value="15">Pets & Animals</option>
+                    <option value="17">Sports</option>
+                    <option value="19">Travel & Events</option>
+                    <option value="20">Gaming</option>
+                    <option value="22">People & Blogs</option>
+                    <option value="23">Comedy</option>
+                    <option value="24">Entertainment</option>
+                    <option value="25">News & Politics</option>
+                    <option value="26">Howto & Style</option>
+                    <option value="27">Education</option>
+                    <option value="28">Science & Technology</option>
+                    <option value="29">Nonprofits & Activism</option>
+                </select>
+                </div>
+                <div id="countries">
+                    Filter by country:&nbsp;
+
+                    <label for="country-selector"></label><select id="country-selector" class="dropdown"
+                                                                  onchange="countryEventListener()">
+                    <option value="all">All</option>
+                    <option value="br">Brazil</option>
+                    <option value="fr">France</option>
+                    <option value="de">Germany</option>
+                    <option value="in">India</option>
+                    <option value="jp">Japan</option>
+                    <option value="mx">Mexico</option>
+                    <option value="ru">Russia</option>
+                    <option value="kr">South Korea</option>
+                    <option value="us">United States</option>
+                </select>
+                </div>
+                <div id="encode-by">
+                    Analyze by:&nbsp;&nbsp;
+                    <label for="type-selector"></label><select id="type-selector" class="dropdown"
+                                                               onchange="typeEventListener()">
+                    <option value="0">Views</option>
+                    <option value="1">Likes</option>
+                    <option value="2">Dislikes</option>
+                    <option value="3">Comments</option>
+                </select>
+                </div>
+                <div id="timelineView"></div>
+            </div>
+        </div>
+
+        <div class="views-container">
+            <div id="filler" class="view"></div>
+            <div id="mapView" class="view"></div>
+            <div id="top10View" class="view"></div>
+            <div id="bubblesView" class="view">
+            </div>
+            <div id="heatmapView" class="view">
+                <div class="button-div">
+                </div>
+            </div>
+            <div id="credits" class="view"> 2021W2 • CPSC 436V ❤️
+                <div>Annie Maurer • Julian Platel • Jonathan Hirsch</div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div id="tooltip"></div>
+<script src="js/d3.v6.min.js"></script>
+<script src="js/d3-annotation.min.js"></script>
+<script src="js/topojson.v3.js"></script>
+<script src="js/timelineView.js"></script>
+<script src="js/mapView.js"></script>
+<script src="js/tableView.js"></script>
+<script src="js/bubblesView.js"></script>
+<script src="js/heatmapView.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

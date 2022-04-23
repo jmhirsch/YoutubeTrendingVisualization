@@ -1,0 +1,18 @@
+{
+  "name": "436v-project",
+  "version": "1.0.0",
+  "description": "## Sources Country centroids: https://developers.google.com/public-data/docs/canonical/countries_csv",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.students.cs.ubc.ca:CPSC436V-2021W-T2/project_g03.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.12.0"
+  }
+}

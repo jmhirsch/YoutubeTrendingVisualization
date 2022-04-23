@@ -1,0 +1,517 @@
+body {
+    font-family: 'Nunito', sans-serif;
+    background: #f0f1f4;
+}
+
+.dropdown {
+    font-size: 15px;
+    font-weight: 500;
+    padding: 5px;
+    color: #000000;
+    background-color: #ffffff;
+    border: 1.2px solid rgba(19, 78, 111, 0.79);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* Containers */
+.content-container {
+    display: flex;
+    justify-content: center;
+    background: #f0f1f4;
+}
+
+#h-subtitle {
+    max-width: 1200px;
+    word-break-wrap: break-word;
+    /*transition: opacity 0.1s ease-in-out, font-size 0.5s ease-in-out;*/
+    transition: height 0.5s ease-in-out, opacity 0.5s ease-in-out, font-size 0.5s ease-in-out;
+}
+
+#clickable-rect {
+    /*fill: #f0f1f4;*/
+    fill-opacity: 0;
+    border: black 5px solid;
+}
+
+
+#blank-top {
+    width: 100%;
+    margin: auto;
+    background: #f0f1f4;
+    top: 0;
+    transition: 0.4s;
+    z-index: 999;
+    position: fixed;
+    left: 0;
+    height: 156px;
+}
+
+.selection {
+    rx: 0.5%;
+    stroke: rgba(19, 78, 111, 0.79);
+    fill: rgba(148, 148, 148, 0.76);
+
+}
+
+.colors {
+    background-color: #1ac0c6;
+    background-color: #54d2d2;
+    background-color: #ffa822;
+    background-color: #ff6150;
+    background-color: #072448;
+    background-color: #dee0e6;
+
+}
+
+#h-title {
+    transition: 0.4s;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: left;
+    background: #f0f1f4;
+}
+
+#top-container {
+    background: #f0f1f4;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    margin: auto;
+}
+
+.filters-container {
+    background: #f0f1f4;
+    top: 0;
+    display: grid;
+    width: 1400px;
+    margin: auto;
+    grid-template-rows: 30px 80px;
+    grid-template-areas:
+  "category countries encode-by"
+  "timelineView timelineView timelineView"
+}
+
+
+#category, #countries, #encode-by {
+    display: flex;
+    align-items: center;
+}
+
+#category-selector, #encode-selector {
+    margin-left: 5px;
+}
+
+#category {
+    margin: auto;
+    grid-area: category;
+}
+
+#countries {
+    margin: auto;
+    grid-area: countries;
+}
+
+#encode-by {
+    margin: auto;
+    grid-area: encode-by;
+}
+
+.views-container {
+    display: grid;
+    width: 1400px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 300px 450px 450px 250px;
+    gap: 20px;
+}
+
+#timelineView #mapView, #top10View, #bubblesView, #heatmapView, #credits {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*scroll-snap-stop: always;*/
+}
+
+
+#timelineView {
+    grid-area: timelineView;
+}
+
+#mapView {
+    grid-column: 1 / span 3;
+    grid-row: 2;
+    /*grid-area: mapView;*/
+    transition: opacity .5s;
+    width: 600px;
+    height: 400px;
+}
+
+#top10View {
+    grid-column: 4 / span 3;
+    grid-row: 2;
+    transition: opacity .5s;
+    width: 600px;
+    height: 400px;
+}
+
+#bubblesView {
+    grid-column: 1;
+    grid-row: 3;
+    margin-left: 100px;
+    width: 200px;
+    height: 600px;
+}
+
+#heatmapView {
+    grid-column: 2/ -1;
+    grid-row: 3;
+    margin-left: 100px;
+}
+
+#credits {
+    overflow: visible;
+    grid-column: 3;
+    justify-content: end;
+    text-align: center;
+    align-items: center;
+    grid-row: 4;
+    font-size: 12px;
+    color: #949393;
+    display: inline-flex;
+    flex-direction: column;
+    white-space: nowrap;
+}
+
+/* geoMap */
+#legendSmallCircle, #legendMediumCircle, #legendLargeCircle, .geo-symbol {
+    fill: #3e5e79;
+}
+
+.geo-path {
+    fill: rgba(178, 178, 178, 0.62);
+}
+
+.geo-boundary-path {
+    stroke: #fff;
+    fill: none;
+    stroke-width: 0.4;
+}
+
+.geo-symbol {
+    fill: #134e6f;
+    fill-opacity: 0.8;;
+}
+
+.geo-symbol:hover {
+    fill-opacity: 1;
+    stroke-width: 1.5;
+    stroke: #333;
+    cursor: pointer;
+}
+
+.geo-label {
+    font-size: .7rem;
+    font-weight: 500;
+}
+
+.geo-visitor-label {
+    font-weight: 700;
+    font-size: .75rem;
+}
+
+/* Tooltip */
+#tooltip {
+    /*transition: all 0.1s;*/
+    position: absolute;
+    display: none;
+    background: #fff;
+    box-shadow: 3px 3px 3px 0px rgb(92 92 92 / 0.5);
+    border: 1px solid #ddd;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 8px;
+    min-width: 160px;
+    border-radius: 10px;
+    color: #333;
+    z-index: 999;
+    overflow-wrap: break-word;
+    max-width: 350px;
+}
+
+.tooltip-title {
+    color: #000;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+.help-label {
+    cursor: help;
+}
+
+.title {
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.title.q {
+    font-weight: 500;
+    font-size: 13px;
+}
+
+.title.circle {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.table.title.help-label {
+    position: relative;
+    top: -110px;
+    right: -200px;
+}
+
+.table.title.q {
+    position: relative;
+    right: -11px;
+    top: -1px;
+}
+
+.table.title.circle {
+    position: relative;
+    right: -20px;
+    top: -1px
+}
+
+.map.title.help-label {
+    position: relative;
+    top: -335px;
+    right: -320px;
+}
+
+.map.title.q {
+    position: relative;
+    right: -10px;
+    top: -1px;
+}
+
+.map.title.circle {
+    position: relative;
+    right: -19px;
+    top: -1px
+}
+
+
+
+/*==============================================*/
+/*Table*/
+.table {
+    /*margin: auto;*/
+    margin-top: -100px;
+    /*border: 2px gray solid;*/
+    border-collapse: collapse;
+}
+
+
+.row-odd {
+    /*border-bottom: 1px solid #134e6f;*/
+}
+
+.row {
+    transition: border .5s;
+    border-bottom: 0.8px solid #134e6f;
+}
+
+.row-header {
+    /*border: 1px gray solid;*/
+    text-align: left;
+    font-size: 15px;
+    font-weight: 700;
+
+}
+
+.row .table-cell .row-div {
+    max-height: 0;
+    padding: 0.2px;
+    box-sizing: border-box;
+    overflow: hidden;
+    transition: max-height 0.3s, padding 0.3s;
+}
+
+.row.activeRow .table-cell .row-div {
+    max-height: 10px;
+    padding: 0.4px;
+    transition: max-height 0.6s, padding 0.6s;
+    font-size: 12px;
+    color: black;
+}
+
+.table-cell {
+    padding: 0.4em;
+    /*border: 1px gray solid;*/
+    text-align: left;
+
+    font-size: 13px;
+}
+
+.cell-num {
+}
+
+.cell-title {
+    width: 450px
+}
+
+.cell-ranking {
+    width: 60px;
+    text-align: center;
+}
+
+/*==============================================*/
+/*==============================================*/
+/*Bubbles*/
+
+
+#bubblesView {
+    z-index: 990;
+}
+
+.bubble {
+    shape-rendering: crispEdges;
+    user-select: text;
+    opacity: 90%;
+    z-index: 992;
+    cursor: pointer;
+    border: black solid 1px;
+    stroke-width: 0;
+}
+
+
+.bubble-text {
+    pointer-events: none;
+    z-index: 993;
+    transition: opacity 0.5s;
+}
+
+/*===========================================*/
+/*Timeline*/
+
+#header-shape-gradient {
+    --color-stop: #ad71ed;
+    --color-bot: rgb(255, 97, 80);
+}
+
+.chart-area {
+    fill: url(#header-shape-gradient) #fff;
+}
+
+.axis text {
+    font-size: 13px;
+    fill: #6b6b6b;
+}
+
+.annotation.no-dislikes {
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+
+.axis path {
+    stroke: #ddd;
+}
+
+/*=============================================*/
+/*Heatmap*/
+
+
+.axis-title {
+    font-size: 13px;
+    fill: #888;
+}
+
+
+.axis.legend-axis text {
+    font-size: 11px;
+}
+
+.axis.y-axis.heatmap {
+    display: none;
+}
+
+.weekdays {
+    display: inline-block;
+    font-size: 13px;
+    fill: #6b6b6b;
+    transition: all 0.5s ease-in-out;
+    text-anchor: middle;
+}
+
+.timeOfDay{
+    fill: #6b6b6b;
+}
+
+.legend-title {
+    font-size: 13px;
+    fill: #888;
+}
+
+
+.button-div {
+    display: inline-block;
+    margin: 5px;
+    position: absolute;
+    top: 630px;
+    right: 800px;
+    z-index: 999;
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+    background-color: RoyalBlue;
+}
+
+.cell {
+    stroke: rgba(0, 0, 0, 0.07);
+}
+
+
+.map-annotation {
+    stroke-dasharray: 3, 3;
+}
+
+
+.map-annotation {
+    stroke-dasharray: 3, 3;
+}
+
+.h-btn {
+    stroke: rgba(120, 59, 183, 0.73);
+    stroke-width: 0.5px;
+    fill: rgb(255, 255, 255);
+    rx: 5px;
+    width: 30px;
+    height: 25px;
+    cursor: pointer;
+    y: 40px
+}
+
+.h.icon {
+    cursor: pointer;
+    fill: rgba(120, 59, 183, 0.73);
+}
+
+#up-btn {
+    x: 0px;
+}
+
+#down-btn {
+    x: 32;
+}
+
+#left-btn {
+    x: 90px;
+}
+
+#right-btn {
+    x: 122px;
+}
