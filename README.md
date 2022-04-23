@@ -1,5 +1,8 @@
 # Project
 
+## Preview
+![Thumbnail](thumbnail.png?raw=true "Youtube Vis Thumbnail")
+
 ## Running
 
 Our project will run using the small dataset by default. To use the full dataset, unzip 'fullsizedata.json.zip' to '
