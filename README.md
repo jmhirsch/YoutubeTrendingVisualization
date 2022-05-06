@@ -1,5 +1,25 @@
 # Project
 
+## About
+
+Our visualization tackles the problem of understanding the factors that contribute to making a YouTube video trend online.
+
+Our visualization allows the user to obtain customized information based on the following filters: YouTube categories, countries in the dataset, trending date and whether to analyze the data based on number of views, number of likes, number of dislikes, and number of comments. 
+
+The world map view allows the user to quickly compare the selected information geographically between the countries.
+
+The table view allows the user to clearly see the top 10 videos given the selected filters. 
+
+The bubbles allow the user to see the distribution of trending videos between the different categories. 
+
+Lastly, we have a heatmap to visualize trends in the number of views trending videos get based on what day and time they are posted. 
+
+This visualization is intended to help content creators better understand what currently drives videos to become trending, and provide them with insights into how they can optimize their own content.
+
+
+## Live link
+- [View Here](https://www.students.cs.ubc.ca/~cs-436v/22Jan/fame/projects/project_g03/index.html). Best on Chrome (may take a couple of seconds to load)
+
 ## Preview
 ![Thumbnail](thumbnail.png?raw=true "Youtube Vis Thumbnail")
 
@@ -103,3 +123,7 @@ https://github.com/UBC-InfoVis/436V-materials/tree/22Jan/case-studies/case-study
 The code for our heatmaps legend was almost entirely copied from the courses’ (CPSC 436V) case study, The Impact of
 Vaccines on the Measles. Additional changes were made so to fit our colour scheme and so that the labels would show the
 proper units depending on the filtered dataset.
+
+
+### Credits
+Annie Maurer, Julian Platel, Jonathan Hirsch
