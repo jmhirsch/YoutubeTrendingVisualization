@@ -111,10 +111,11 @@ function iterateThroughData(data, start, end, country) {
 }
 
 Promise.all([
-    d3.json('data/world-110m.json'),
-    d3.csv('data/country-info.csv'),
-    d3.json(datasetloc),
-    d3.json('data/categories-titles.json')
+    d3.json('https://github.com/jmhirsch/YoutubeTrendingVisualization/blob/45e4e705db130c35da7e5f766ea01a73be7b6c1a/data/world-110m.json'),
+    d3.csv('https://github.com/jmhirsch/YoutubeTrendingVisualization/blob/45e4e705db130c35da7e5f766ea01a73be7b6c1a/data/country-info.csv'),
+    d3.json('https://github.com/jmhirsch/YoutubeTrendingVisualization/blob/45e4e705db130c35da7e5f766ea01a73be7b6c1a/data/smalldata.json'),
+    d3.json('https://github.com/jmhirsch/YoutubeTrendingVisualization/blob/45e4e705db130c35da7e5f766ea01a73be7b6c1a/data/Categories-titles.json')
+
 ]).then(data => {
     data[1].forEach(d => {
         d.size = +d.size;
