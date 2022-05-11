@@ -57,6 +57,8 @@ class HeatmapView {
             .attr('width', vis.config.containerWidth)
             .attr('height', vis.config.containerHeight);
 
+
+
         vis.svg.on('mousemove', function (event, d) {
             d3.select('#tooltip')
                 .style('left', `${event.pageX + vis.config.tooltipPadding}px`)
@@ -67,57 +69,16 @@ class HeatmapView {
         // Append actual chart
         vis.chartArea = vis.svg.append('g')
             .attr('transform', `translate(${vis.config.margin.left},${vis.config.margin.top})`)
-            .on("wheel.zoom", (event, d) => {
-                event.preventDefault()
-                event.stopPropagation()
-            });
-
 
         vis.chart = vis.chartArea.append('g')
-            .on("wheel.zoom", (event, d) => {
+            .on('wheel.zoom', (event, d) => vis.scrollEvent(event, d, vis));
 
-                if (Math.abs(event.wheelDeltaY) > Math.abs(event.wheelDeltaX)) {
-
-                    if (event.wheelDeltaY < -3) {
-                        vis.counterTime -= 1
-                        event.preventDefault()
-                        event.stopPropagation()
-                        vis.scrollVis()
-
-                    } else if (event.wheelDeltaY > 3) {
-                        vis.counterTime += 1;
-                        event.preventDefault()
-                        event.stopPropagation()
-                        vis.scrollVis()
-
-                    }
-                }
-
-                if (Math.abs(event.wheelDeltaY) < Math.abs(event.wheelDeltaX)) {
-
-                    if (event.wheelDeltaX < -4) {
-
-                        vis.slowDownTime -= 1;
-                        if (vis.slowDownTime === -8) {
-                            vis.slowDownTime = 0;
-                            vis.counterDay -= 1
-                            event.preventDefault()
-                            event.stopPropagation()
-                            vis.scrollVis()
-                        }
-
-                    } else if (event.wheelDeltaX > 4) {
-                        vis.slowDownTime += 1;
-                        if (vis.slowDownTime === 8) {
-                            vis.slowDownTime = 0;
-                            vis.counterDay += 1
-                            event.preventDefault()
-                            event.stopPropagation()
-                            vis.scrollVis()
-                        }
-                    }
-                }
-            });
+        vis.scrollingRect = vis.chart.append('rect')
+            .attr('opacity', '0')
+            .attr('width', vis.config.width)
+            .attr('height', vis.config.height);
+        vis.scrollingRect
+            .on("wheel.zoom", (event, d) => vis.scrollEvent(event, d, vis))
 
         // Initialize scales
         vis.colorScale = d3.scaleLinear()
@@ -309,8 +270,6 @@ class HeatmapView {
     updateVis() {
         const vis = this;
 
-        vis.dumbyList = [];
-
         // Add published day and time variables; calculate max views
         vis.data.forEach(d => {
             d['PublishedDay'] = d.PublishedDate.getDay();
@@ -326,7 +285,7 @@ class HeatmapView {
             d['TotalViews'] = maxViews;
         })
 
-        vis.groupedData = d3.groups(vis.data, d => d['DayTime']);
+        vis.groupedData = d3.group(vis.data, d => d['DayTime']);
         vis.groupedViewCount = d3.rollup(vis.data, v => d3.sum(v, d => d['TotalViews']), d => d['DayTime']);
         vis.groupedDay = d3.group(vis.data, d => d.PublishedDay);
         vis.groupedTime = d3.group(vis.data, d => d.PublishedTime);
@@ -335,18 +294,18 @@ class HeatmapView {
         for (let i = 0; i < 7; i++) {
             for (let m = 0; m < 24; m++) {
                 let indexValue = `${i}${m}`;
-                if (vis.groupedViewCount.get(indexValue) == undefined) {
+
+                if (!vis.groupedViewCount.has(indexValue)) {
                     vis.groupedViewCount.set(indexValue, 0);
-                    vis.groupedData.set(indexValue, vis.dumbyList);
+                    vis.groupedData.set(indexValue, [])
                 }
             }
         }
 
-        vis.groupedData.sort((a,b) => {
+        vis.groupedData = new Map([...vis.groupedData].sort((a,b) => {
             return a[0] > b[0] ?  1 : a[0] < b[0] ?  -1:  0;
-        })
+        }))
 
-        //console.log(vis.groupedData)
 
         vis.cellWidth = (vis.config.width / (vis.xScale.domain()[1] - vis.xScale.domain()[0])) - 5;
 
@@ -368,6 +327,45 @@ class HeatmapView {
         if (vis.first) {
             vis.first = false;
             vis.scrollVis();
+        }
+    }
+
+    scrollEvent(event, d, vis) {
+        event.preventDefault()
+        event.stopPropagation()
+
+        if (Math.abs(event.wheelDeltaY) > Math.abs(event.wheelDeltaX)) {
+
+            if (event.wheelDeltaY < -3) {
+                vis.counterTime -= 1
+                vis.scrollVis()
+
+            } else if (event.wheelDeltaY > 3) {
+                vis.counterTime += 1;
+                vis.scrollVis()
+
+            }
+        }
+
+        if (Math.abs(event.wheelDeltaY) < Math.abs(event.wheelDeltaX)) {
+
+            if (event.wheelDeltaX < -4) {
+
+                vis.slowDownTime -= 1;
+                if (vis.slowDownTime === -8) {
+                    vis.slowDownTime = 0;
+                    vis.counterDay -= 1
+                    vis.scrollVis()
+                }
+
+            } else if (event.wheelDeltaX > 4) {
+                vis.slowDownTime += 1;
+                if (vis.slowDownTime === 8) {
+                    vis.slowDownTime = 0;
+                    vis.counterDay += 1
+                    vis.scrollVis()
+                }
+            }
         }
     }
 
