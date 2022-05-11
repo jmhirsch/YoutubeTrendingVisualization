@@ -19,6 +19,8 @@ This visualization is intended to help content creators better understand what c
 
 ## Live link
 - [View Here](https://www.students.cs.ubc.ca/~cs-436v/22Jan/fame/projects/project_g03/index.html). Best on Chrome (may take a couple of seconds to load)
+      - Scrolling & icon placements may not work properly on Safari / Firefox
+- Github-Pages hosted here: [jonathanhirsch.ca/YoutubeTrendingVisualization](https://jonathanhirsch.ca/YoutubeTrendingVisualization)
 
 ## Preview
 ![Thumbnail](thumbnail.png?raw=true "Youtube Vis Thumbnail")
