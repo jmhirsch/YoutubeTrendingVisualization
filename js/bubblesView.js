@@ -256,10 +256,10 @@ class BubblesView {
             .force('y', d3.forceY().strength(vis.forceStrength).y(vis.centre.y))
             .force('collision', d3.forceCollide().radius(d => d.radius + 2));
         vis.simulation.nodes(vis.nodes);
-        vis.simulation.alpha(0.5);
-        vis.simulation.alphaTarget(0.001)
+        vis.simulation.alpha(0.8);
+        vis.simulation.alphaTarget(0)
 
-        vis.bubbles.transition().duration(1000).attr('r', d => d.radius);
+        vis.bubbles.transition().duration(750).attr('r', d => d.radius);
 
         vis.simulation.on('tick', d => vis.tick(d));
         vis.simulation.restart()
@@ -300,7 +300,7 @@ class BubblesView {
     }
 
     shouldDisplayCategory(r, text) {
-        return r * 2 + 3 > this.get_tex_width(text, "13px Helvetica");
+        return r * 2 + 3 > this.get_tex_width(text, "13px Nunito");
     }
 
     get_tex_width(txt, font) {
